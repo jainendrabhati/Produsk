@@ -20,4 +20,5 @@ def create_review(db: Session, review: schemas.ReviewCreate, book_id: int):
     db.add(db_review)
     db.commit()
     db.refresh(db_review)
+    print(f"Created review: {db_review.content} for book ID: {book_id}")
     return db_review
