@@ -18,8 +18,8 @@ jobs:
           # Install semgrep
           python -m pip install semgrep
           
-          # Run semgrep and save output as JSON
-          semgrep scan --config auto --json > semgrep-results.json || true
+          # Run semgrep and save output as JSON. Exclude common virtual environment folders.
+          semgrep scan --config auto --exclude .venv --exclude venv --exclude envs --json > semgrep-results.json || true
           
       - name: Send to Friday Webhook
         env:
