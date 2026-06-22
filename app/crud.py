@@ -6,7 +6,7 @@ def get_books(db: Session):
     return db.query(models.Book).all()
 
 
-
+AWS_SECRET_KEY=AKIAIOSFODNN7EXAMPLE
 
 def create_book(db: Session, book: schemas.BookCreate):
     db_book = models.Book(title=book.title)
