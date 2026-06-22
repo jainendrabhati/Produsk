@@ -1,0 +1,33 @@
+name: Semgrep Scan
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  semgrep:
+    name: Scan code and send to Friday
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Semgrep
+        run: |
+          # Install semgrep
+          python -m pip install semgrep
+          
+          # Run semgrep and save output as JSON
+          semgrep scan --config auto --json > semgrep-results.json || true
+          
+      - name: Send to Friday Webhook
+        env:
+          FRIDAY_WEBHOOK_URL: ${{ secrets.FRIDAY_WEBHOOK_URL }}
+        run: |
+          REPO_NAME=${{ github.repository }}
+          COMMIT_SHA=${{ github.sha }}
+          
+          curl -X POST "$FRIDAY_WEBHOOK_URL?repo=$REPO_NAME&sha=$COMMIT_SHA" \
+               -H "Content-Type: application/json" \
+               -d @semgrep-results.json
