@@ -6,11 +6,7 @@ def get_books(db: Session):
     return db.query(models.Book).all()
 
 
------BEGIN PRIVATE KEY-----
-MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQD1234567890
-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
------END PRIVATE KEY-----
+
 
 def create_book(db: Session, book: schemas.BookCreate):
     db_book = models.Book(title=book.title)
