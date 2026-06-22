@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-AWS_SECRET_KEY=AKIAIOSFODNN7EXAMPLE
 
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
 
